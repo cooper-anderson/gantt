@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 pub mod method;
 
 #[derive(PartialEq, Eq, Hash)]
@@ -16,18 +14,18 @@ impl Process {
 }
 
 pub struct Problem {
-	pub processes: HashSet<Process>,
+	pub processes: Vec<Process>,
 	pub length: i32
 }
 
 impl Problem {
 	pub fn new(raw: Vec<(&str, i32, i32)>) -> Self {
-		let mut processes: HashSet<Process> = HashSet::new();
+		let mut processes: Vec<Process> = Vec::new();
 		let mut length: i32 = 0;
 
 		for p in raw {
 			length += p.2;
-			processes.insert(Process::new(p));
+			processes.push(Process::new(p));
 		}
 
 		Problem {processes, length}

@@ -31,7 +31,7 @@ mod example_q4 {
 	fn response() {
 		let problem = Problem::example();
 		let answer = super::run(problem, 4);
-		assert_eq!(3.6, answer.turnaround);
+		assert_eq!(3.6, answer.response);
 	}
 }
 
@@ -62,6 +62,6 @@ mod example_q1 {
 	fn response() {
 		let problem = Problem::example();
 		let answer = super::run(problem, 4);
-		assert_eq!(0.8, answer.turnaround);
+		assert_eq!(0.8, answer.response);
 	}
 }

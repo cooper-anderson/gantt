@@ -31,6 +31,6 @@ mod example {
 	fn response() {
 		let problem = Problem::example();
 		let answer = super::run(problem);
-		assert_eq!(3.6, answer.turnaround);
+		assert_eq!(3.6, answer.response);
 	}
 }

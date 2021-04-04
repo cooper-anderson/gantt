@@ -12,5 +12,25 @@ mod example {
 	fn order() {
 		let problem = Problem::example();
 		let answer = super::run(problem, 4);
+		let order = vec![
+			"A", "A", "A", "B", "B", "B", "B", "C", "C", "C",
+			"C", "D", "D", "D", "D", "B", "B", "E", "E", "D"
+		];
+
+		assert_eq!(order, answer.order);
+	}
+
+	#[test]
+	fn turnaround() {
+		let problem = Problem::example();
+		let answer = super::run(problem, 4);
+		assert_eq!(10.0, answer.turnaround);
+	}
+
+	#[test]
+	fn response() {
+		let problem = Problem::example();
+		let answer = super::run(problem, 4);
+		assert_eq!(3.6, answer.turnaround);
 	}
 }

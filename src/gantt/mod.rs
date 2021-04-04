@@ -47,13 +47,13 @@ impl Problem {
 pub struct Answer {
 	name: String,
 	order: Vec<String>,
-	turnaround: i32,
-	response: i32
+	turnaround: f32,
+	response: f32
 }
 
 impl Answer {
 	pub fn new(
-		name: &str, order: Vec<String>, turnaround: i32, response: i32
+		name: &str, order: Vec<String>, turnaround: f32, response: f32
 	) -> Self {
 		Answer {name: name.to_string(), order, turnaround, response}
 	}

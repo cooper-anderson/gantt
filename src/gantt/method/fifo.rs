@@ -1,7 +1,8 @@
 use crate::gantt::{Answer, Problem};
 
 pub fn run(problem: Problem) -> Answer {
-	Answer::new("fifo", vec![], 0, 0)
+	let mut order: Vec<String> = Vec::new();
+	Answer::new("fifo", vec![], 0.0, 0.0)
 }
 
 #[cfg(test)]

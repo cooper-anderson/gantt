@@ -1,8 +1,29 @@
-use crate::gantt::{Answer, Problem};
+use std::collections::{HashMap, VecDeque};
+
+use crate::gantt::{Answer, Problem, Process};
 
 pub fn run(problem: Problem) -> Answer {
 	let mut order: Vec<String> = Vec::new();
-	Answer::new("fifo", vec![], 0.0, 0.0)
+	let mut queue: VecDeque<&Process> = VecDeque::new();
+	let mut counts: HashMap<&String, usize> = HashMap::new();
+	let length = problem.length;
+
+	for i in 0..length {
+		for proc in &problem.processes {
+			match queue.pop_front() {
+				Some(p) => {
+					let count = counts.entry(&p.label).or_insert(0);
+					order.push(p.label.clone());
+					*count += 1;
+					if *count != p.service { queue.push_front(p) }
+				}
+				None => {}
+			}
+			if i == proc.arrival { queue.push_back(proc); }
+		}
+	}
+
+	Answer::new("fifo", problem, order)
 }
 
 #[cfg(test)]

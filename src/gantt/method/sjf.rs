@@ -1,7 +1,37 @@
-use crate::gantt::{Answer, Problem};
+use std::collections::HashMap;
+use priority_queue::PriorityQueue;
+
+use crate::gantt::{Answer, Problem, Process};
 
 pub fn run(problem: &Problem) -> Answer {
-	Answer::new("sjf", problem, vec![])
+	let mut order: Vec<String> = Vec::new();
+	let mut stack: PriorityQueue<&Process, usize> = PriorityQueue::new();
+	let mut counts: HashMap<&String, usize> = HashMap::new();
+	let mut current: Option<(&Process, usize)> = None;
+	let mut dirty = true;
+
+	for i in 0..problem.length {
+		for proc in &problem.processes {
+			if i == proc.arrival { stack.push(proc, problem.length - proc.service); }
+		}
+
+		if dirty {
+			current = stack.pop();
+			dirty = false;
+		}
+
+		match current {
+			Some((process, _)) => {
+				let count = counts.entry(&process.label).or_insert(0);
+				order.push(process.label.clone());
+				*count += 1;
+				if *count == process.service { dirty = true }
+			}
+			None => {}
+		}
+	}
+	
+	Answer::new("sjf", problem, order)
 }
 
 #[cfg(test)]

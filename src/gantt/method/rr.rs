@@ -7,22 +7,25 @@ pub fn run(problem: &Problem, q: usize) -> Answer {
 	let mut queue: VecDeque<&Process> = VecDeque::new();
 	let mut counts: HashMap<&String, usize> = HashMap::new();
 
-	for i in 0..problem.length {
-		for proc in &problem.processes {
-			if i == proc.arrival { queue.push_back(proc); }
-		}
-
+	for i in 0..problem.length + 1 {
 		match queue.pop_front() {
 			Some(p) => {
 				let count = counts.entry(&p.label).or_insert(0);
 				order.push(p.label.clone());
 				*count += 1;
+				for proc in &problem.processes {
+					if i == proc.arrival { queue.push_back(proc); }
+				}
 				if *count != p.service {
 					if *count % q == 0 { queue.push_back(p) }
 					else { queue.push_front(p) }
 				}
 			}
-			None => {}
+			None => {
+				for proc in &problem.processes {
+					if proc.arrival == 0 { queue.push_back(proc); }
+				}
+			}
 		}
 	}
 

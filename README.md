@@ -23,7 +23,7 @@ processes and their arrival/service times.
  rr q=4 | A | A | A | B | B | B | B | C | C | C | C  | D  | D  | D  | D  | B  | B  | E  | E  | D
  sjf    | A | A | A | B | B | B | B | B | B | E | E  | C  | C  | C  | C  | D  | D  | D  | D  | D
 
- t      | Average turnaround time | Average response time
+        | Average turnaround time | Average response time
 --------|-------------------------|----------------------
  fifo   | `8.6`                   | `4.6`
  rr q=4 | `10.0`                  | `3.6`

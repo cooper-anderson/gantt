@@ -31,6 +31,7 @@ impl Problem {
 		Problem {processes, length}
 	}
 
+	#[allow(dead_code)]
 	pub fn example() -> Self {
 		Problem::new(vec![
 			("A", 0, 3),
@@ -50,17 +51,26 @@ pub struct Answer {
 }
 
 impl Answer {
-	pub fn new(name: &str, problem: Problem, order: Vec<String>) -> Self {
+	pub fn new(name: &str, problem: &Problem, order: Vec<String>) -> Self {
 		let mut turnaround: f32 = 0.0;
 		let mut response: f32 = 0.0;
 		let size = problem.processes.len() as f32;
-		for process in problem.processes {
+		for process in &problem.processes {
 			turnaround += Answer::get_turnaround(&order, &process) as f32;
 			response += Answer::get_response(&order, &process) as f32;
 		}
 		turnaround /= size;
 		response /= size;
 		Answer {name: name.to_string(), order, turnaround, response}
+	}
+
+	pub fn print(self) {
+		let tab = "    ";
+		println!("{}:", self.name);
+		print!("{}order      : ", tab);
+		for label in self.order { print!("[{}]", label); }
+		println!("\n{}turnaround : {}", tab, self.turnaround);
+		println!("{}response   : {}", tab, self.response);
 	}
 
 	fn get_turnaround(order: &Vec<String>, process: &Process) -> usize {

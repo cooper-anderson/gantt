@@ -1,7 +1,7 @@
 use crate::gantt::{Answer, Problem};
 
 pub fn run(problem: Problem) -> Answer {
-	Answer::new("sjf", vec![], 0.0, 0.0)
+	Answer::new("sjf", problem, vec![])
 }
 
 #[cfg(test)]

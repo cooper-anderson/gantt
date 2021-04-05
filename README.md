@@ -21,10 +21,12 @@ processes and their arrival/service times.
 --------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----
  fifo   | A | A | A | B | B | B | B | B | B | C | C  | C  | C  | D  | D  | D  | D  | D  | E  | E
  rr q=4 | A | A | A | B | B | B | B | C | C | C | C  | D  | D  | D  | D  | B  | B  | E  | E  | D
+ rr q=1 | A | A | B | A | B | C | B | D | C | B | E  | D  | C  | B  | E  | D  | C  | B  | D  | D
  sjf    | A | A | A | B | B | B | B | B | B | E | E  | C  | C  | C  | C  | D  | D  | D  | D  | D
 
         | Average turnaround time | Average response time
 --------|-------------------------|----------------------
  fifo   | `8.6`                   | `4.6`
  rr q=4 | `10.0`                  | `3.6`
+ rr q=1 | `10.8`                  | `0.8`
  sjf    | `7.6`                   | `3.6`
